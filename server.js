@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require("./config/db");
 const path = require('path');
+const cors = require('cors');
 const app = express();
 
 const PORT = process.env.PORT || 3000 ;
@@ -10,6 +11,14 @@ app.use(express.static('public'));          // without this line you will get MI
 app.use(express.json());
 
 connectDB();
+
+//Cors
+
+const corsOptions = {
+    origin: process.env.ALLOWED_CLIENTS.split(',')
+}
+
+app.use(cors(corsOptions));
 
 //Template engine
 
